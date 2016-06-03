@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>viewpointValue</title>
+
+    <meta name="viewport"  content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+
+<!--<div id="options" class="form-wrapper">
+    <fieldset class="radio-check-label" id="color">
+        <span class="label">答题模式:</span>
+        <div class="input-wrapper">
+            <label class="radio" id="dark">
+                <input type="radio" name="color" value="dark"/>
+                <span>夜色模式</span>
+            </label>
+            <label class="radio" id="light">
+                <input type="radio" name="color" value="light"/>
+                <span>日光模式</span>
+            </label>
+        </div>
+    </fieldset>
+</div>-->
+
+<div id="form" class="form-wrapper">
+
+    <fieldset class="radio-check-label">
+        <span class="label" id="spanQuestion">你喜欢这个应用吗?</span>
+
+        <div class="input-wrapper" id="divAnswer1">
+            <label class="radio" for="inputAnswer1">
+                <input type="radio" name="foo" value="inputAnswer1" id="inputAnswer1"/>
+                <span id="spanAnswer1">当然,简直完美啊!哈哈哈</span>
+            </label>
+        </div>
+
+        <div class="input-wrapper" id="divAnswer2">
+            <label class="radio" for="inputAnswer2" >
+                <input type="radio" name="foo" value="inputAnswer2" id="inputAnswer2"/>
+                <span id="spanAnswer2">什么鬼东西,简直浪费时间!</span>
+            </label>
+        </div>
+
+        <div class="input-wrapper" id="divAnswer3">
+            <label class="radio" for="inputAnswer3" >
+                <input type="radio" name="foo" value="inputAnswer3" id="inputAnswer3"/>
+                <span id="spanAnswer3">先看看再说吧~</span>
+            </label>
+        </div>
+
+        <div class="input-wrapper" id="divAnswer4">
+            <label class="radio" for="inputAnswer4" >
+                <input type="radio" name="foo" value="inputAnswer4" id="inputAnswer4"/>
+                <span id="spanAnswer4">先看看再说吧~</span>
+            </label>
+        </div>
+
+        <div class="input-wrapper" id="divAnswer5">
+            <label class="radio" for="inputAnswer5" >
+                <input type="radio" name="foo" value="inputAnswer5" id="inputAnswer5"/>
+                <span id="spanAnswer5">先看看再说吧~先看看再说吧~先看看再说吧~先看看再说吧~先看看再说吧~</span>
+            </label>
+        </div>
+
+        <div class="input-wrapper" id="divAnswer6">
+            <label class="radio" for="inputAnswer6" >
+                <input type="radio" name="foo" value="inputAnswer6" id="inputAnswer6"/>
+                <span id="spanAnswer6">先看看再说吧~</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <div class="input-wrapper" >
+        <input type="reset" name="reset" value="下一题" width="90" id="inputNext"/>
+
+        <input type="submit" name="submit" value="查看答案" width="90" id="inputGetAnswer" data-reveal-id="myModal"/>
+    </div>
+    <div class="clear"></div>
+
+    <div id="myModal" class="reveal-modal" >
+        <div id="divAD">
+            <img src="image/ad_pictrue.png" style="width: 100%"/>
+            <h1 style="margin-top: 30px">联系方式:13675856229(陈经理)</h1>
+        </div>
+        <div id="divAnswer">
+            <h1 style="padding-bottom: 20px;">投票结果:</h1>
+
+            <div class="skillbar clearfix " data-percent="20%">
+                <div class="skillbar-title" style="background: #d35400;"><span>A</span></div>
+                <div class="skillbar-bar" style="background: #e67e22;"></div>
+                <div class="skill-bar-percent">20%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div class="skillbar clearfix " data-percent="25%">
+                <div class="skillbar-title" style="background: #2980b9;"><span>B</span></div>
+                <div class="skillbar-bar" style="background: #3498db;"></div>
+                <div class="skill-bar-percent">25%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div class="skillbar clearfix " data-percent="50%">
+                <div class="skillbar-title" style="background: #2c3e50;"><span>C</span></div>
+                <div class="skillbar-bar" style="background: #2c3e50;"></div>
+                <div class="skill-bar-percent">50%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div class="skillbar clearfix " data-percent="40%">
+                <div class="skillbar-title" style="background: #46465e;"><span>D</span></div>
+                <div class="skillbar-bar" style="background: #5a68a5;"></div>
+                <div class="skill-bar-percent">40%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div class="skillbar clearfix " data-percent="75%">
+                <div class="skillbar-title" style="background: #333333;"><span>E</span></div>
+                <div class="skillbar-bar" style="background: #525252;"></div>
+                <div class="skill-bar-percent">75%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div class="skillbar clearfix " data-percent="100%">
+                <div class="skillbar-title" style="background: #27ae60;"><span>F</span></div>
+                <div class="skillbar-bar" style="background: #2ecc71;"></div>
+                <div class="skill-bar-percent">100%</div>
+                <p>answer1</p>
+            </div> <!-- End Skill Bar -->
+
+            <div>
+                <input type="reset" name="reset" value="下一题" width="90" id="inputNext2" style="background: #2C2A27"/>
+            </div>
+
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+    </div>
+
+    <div id="divScore" style="display: none; top: 70%; margin: auto; position: fixed; margin-left: 25%">
+        <h1 style="font-size: 25px;text-align: center">积分: +10 </h1>
+    </div>
+</div>
+
+
+</body>
+
+</html>
