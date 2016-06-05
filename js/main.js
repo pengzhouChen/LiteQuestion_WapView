@@ -204,7 +204,8 @@ $(document).ready(function(){
             width:$(this).attr('data-percent')
         },6000);
     });
-    
+
+    getQuestion();
 });
 
 function allChoseVisibility() {
@@ -217,4 +218,10 @@ function checkChose(){
         return true;
     else
         return false;
+}
+
+function getQuestion(){
+    $.get("http://192.168.0.1:10010/aos/system/listCatalogs.jhtml", function (data,status) {
+        alert("数据:" + data + "\n状态:" + status);
+    })
 }
