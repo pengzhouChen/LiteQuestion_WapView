@@ -221,7 +221,9 @@ function checkChose(){
 }
 
 function getQuestion(){
-    $.get("http://192.168.0.1:10010/aos/system/listCatalogs.jhtml", function (data,status) {
+    $.get("http://localhost:10010/aos/system/listCatalogs.jhtml", function (data,status) {
         alert("数据:" + data + "\n状态:" + status);
+        var obj = JSON.parse(data);
+        $("#spanQuestion").text(obj)
     })
 }
