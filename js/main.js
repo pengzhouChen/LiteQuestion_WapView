@@ -1,58 +1,19 @@
 var count = 0;
 
+var url = "http://localhost:8081/";
+
 $(document).ready(function(){
     $("#inputNext,#inputNext2").click(function() {
-            /*testCode*/
-            count = Math.floor(Math.random()*10 + 1);
-            /*testCode end*/
-
             if(!checkChose())
             {
                 window.alert("请选择一个答案再继续。");
                 return ;
             }
-            $("#inputNext").hide();
-            $("#inputGetAnswer").hide();
 
-            allChoseVisibility();
-            switch(count)
-            {
-                case 0:
-                    $("#divAnswer1").hide();
-                case 1:
-                    $("#divAnswer2").hide();
-                case 2:
-                    $("#divAnswer3").hide();
-                case 3:
-                    $("#divAnswer4").hide();
-                case 4:
-                    $("#divAnswer5").hide();
-                case 5:
-                    $("#divAnswer6").hide();
-                default:
-                    break;
-            }
+            postAnswer();
+            getQuestion();
+            getScore();
 
-            /*testCode*/
-            document.getElementById("spanQuestion").innerHTML = "spanQuestion";
-            document.getElementById("spanAnswer1").innerHTML = "spanAnswer1";
-            document.getElementById("spanAnswer2").innerHTML = "spanAnswer2";
-            document.getElementById("spanAnswer3").innerHTML = "spanAnswer3";
-            document.getElementById("spanAnswer4").innerHTML = "spanAnswer4";
-            document.getElementById("spanAnswer5").innerHTML = "spanAnswer5";
-            document.getElementById("spanAnswer6").innerHTML = "spanAnswer6";
-            /*testCode end*/
-
-            setTimeout(function(){$("#inputNext").show();
-                $("#inputGetAnswer").show();},3000);
-
-            var modal = $(this);
-            modal.trigger('reveal:close');
-
-            $("#divScore").fadeIn("show");
-            setTimeout(function () {
-                $("#divScore").fadeOut("show");
-            },1000)
         });
 
     $('.form-wrapper, html').addClass('dark');
@@ -86,6 +47,8 @@ $(document).ready(function(){
             return ;
         }
 
+        getAd();
+        getAnswer();
         e.preventDefault();
         var modalLocation = $(this).attr("data-reveal-id");
         $('#'+modalLocation).reveal($(this).data());
@@ -206,6 +169,8 @@ $(document).ready(function(){
     });
 
     getQuestion();
+
+    hideAnswer();
 });
 
 function allChoseVisibility() {
@@ -220,10 +185,128 @@ function checkChose(){
         return false;
 }
 
+function hideAnswer(){
+    switch(count)
+    {
+        case 0:
+            $("#divAnswer1,#div_skill_bar_0").hide();
+        case 1:
+            $("#divAnswer2,#div_skill_bar_1").hide();
+        case 2:
+            $("#divAnswer3,#div_skill_bar_2").hide();
+        case 3:
+            $("#divAnswer4,#div_skill_bar_3").hide();
+        case 4:
+            $("#divAnswer5,#div_skill_bar_4").hide();
+        case 5:
+            $("#divAnswer6,#div_skill_bar_5").hide();
+        default:
+            break;
+    }
+}
+
 function getQuestion(){
-    $.get("http://localhost:10010/aos/system/listCatalogs.jhtml", function (data,status) {
-        alert("数据:" + data + "\n状态:" + status);
+    var resString = {"userId":"1001"};
+    debugger;
+    $.get(url + "getQuestion", resString,
+        function (data,status) {
+            if (status != success){ return ; }
+
+            /*var obj = JSON.parse(data);
+            $("#spanQuestion").text(obj.question[0].question_title);
+            $("#spanQuestion").attr("data-question-id",obj.question[0].question_id);
+            count = obj.question[0].answer.length;
+
+            for(var i = 0 ; i < count ; i++)
+            {
+                $("#spanAnswer" + i).text(obj.question[0].answer[i].result_content);
+                $("#spanAnswer" + i).attr("data-answer-id",obj.question[0].answer[i].result_id);
+            }
+
+            allChoseVisibility();
+            hideAnswer();
+            $("#inputNext").hide();
+            $("#inputGetAnswer").hide();
+
+            setTimeout(
+                function(){
+                    $("#inputNext").show();
+                    $("#inputGetAnswer").show();
+                }, 3000);
+
+            var modal = $(this);
+            modal.trigger('reveal:close');*/
+        });
+
+    /*//testCode
+    data = '{"resultcode":"1","question":[{"question_title":"你喜欢这个应用吗?","question_id":"1001","answer":[{"result_id":"101","result_content":"当然,简直完美啊!哈哈哈"},{"result_id":"102","result_content":"什么鬼东西,简直浪费时间!"},{"result_id":"103","result_content":"先看看再说吧~"}]}]}';
+    alert("数据:" + data + "\n状态:" + status);
+    var obj = JSON.parse(data);
+    $("#spanQuestion").text(obj.question[0].question_title);
+    $("#spanQuestion").attr("data-question-id",obj.question[0].question_id);
+    count = obj.question[0].answer.length;
+
+    for(var i = 0 ; i < count ; i++)
+    {
+        $("#spanAnswer" + i).text(obj.question[0].answer[i].result_content);
+        $("#spanAnswer" + i).attr("data-answer-id",obj.question[0].answer[i].result_id);
+    }
+    allChoseVisibility();
+    hideAnswer();
+    $("#inputNext").hide();
+    $("#inputGetAnswer").hide();
+
+    setTimeout(function(){$("#inputNext").show();
+        $("#inputGetAnswer").show();},3000);
+
+
+    var modal = $(this);
+    modal.trigger('reveal:close');
+    //end of testCode*/
+}
+
+function getScore() {
+    $.get("",function (data,status) {
         var obj = JSON.parse(data);
-        $("#spanQuestion").text(obj)
+        $("#h1Score").text("积分: +" + obj.answerscore);
+    });
+    $("#divScore").fadeIn("show");
+    setTimeout(function () {
+        $("#divScore").fadeOut("show");
+    },1000)
+}
+
+function getAd(){
+    $.get("",function (data,status) {
+        var obj = JSON.parse(data);
+        $("#img_AD").attr("src",obj.ad_pic);
+        $("#h1_AD").text(obj.ad_context);
+        $("#a_AD").attr("href",obj.ad_url);
+    })
+}
+
+function getAnswer(){
+    $.get("",function (data,status) {
+        var obj = JSON.parse(data);
+        count = obj.answer.length;
+        for(var i = 0; i <count; i++) {
+            $("#skill_bar_title_" + i).text(obj.answer[i].answerContent);
+            $("#skill_bar_percent_" + i).text(obj.answer[i].answerPercent);
+        }
+    })
+}
+
+function postAnswer(){
+    var userId = $.cookie("userId");
+    var questionId = $("spanQuestion").attr("data-question-id");
+    var answerId = $("input[name='foo']:checked").attr("data-answer-id");
+    $.post("",{
+        userId : userId,
+        questionId : questionId,
+        answerId : answerId
+    },function(data,status){
+        //testCode
+        alert("Data: " + data + "nStatus: " + status);
+        //end of testCode
     })
 }
