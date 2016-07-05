@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>用户中心</title>
+
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport"  content="initial-scale=1, width=device-width">
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="form" class="form-wrapper">
+    <div id="info">
+        <label class="text">
+            <span>昵称:</span>
+            <div class="input-wrapper">
+                <input type="text" />
+            </div>
+        </label>
+
+        <label class="dropdown">
+            <span>性别:</span>
+            <div class="input-wrapper">
+                <select size="1">
+                    <option>-- 请选择 --</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+        </label>
+
+        <label class="dropdown">
+            <span>年龄:</span>
+            <div class="input-wrapper">
+                <select size="1">
+                    <option>-- 请选择 --</option>
+                    <option value="0">低于18岁</option>
+                    <option value="1">18~22岁</option>
+                    <option value="2">22岁~26岁</option>
+                    <option value="3">26岁~30岁</option>
+                    <option value="4">大于30岁</option>
+                </select>
+            </div>
+        </label>
+
+
+        <label class="dropdown">
+            <span>所在地:</span>
+            <div class="input-wrapper" style="width: 40%">
+                <select size="1" >
+                    <option> 请选择省份: </option>
+                    <option value="0">低于18岁</option>
+                    <option value="1">18~22岁</option>
+                    <option value="2">22岁~26岁</option>
+                    <option value="3">26岁~30岁</option>
+                    <option value="4">大于30岁</option>
+                </select>
+            </div>
+            <div class="input-wrapper" style="width:40%">
+                <select size="1">
+                    <option> 请选择城市: </option>
+                    <option value="17">低于18岁</option>
+                    <option value="22">18~22岁</option>
+                    <option value="26">22岁~26岁</option>
+                    <option value="30">26岁~30岁</option>
+                    <option value="100">大于30岁</option>
+                </select>
+            </div>
+        </label>
+
+        <label class="text">
+            <span>手机号码(用于提现,务必准确):</span>
+            <div class="input-wrapper">
+                <input type="text" />
+            </div>
+        </label>
+    </div>
+
+
+    <label class="text">
+        <span>您的积分:</span>
+        <div class="input-wrapper">
+            <input type="text" readonly/>
+        </div>
+    </label>
+    <div align="center">
+        <input type="submit" name="submit" value="提现" width="90" id="inputGetCash" style="float: none"/>
+    </div>
+
+</div>
+
+<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+
+<script src="../js/index.js"></script>
+
+</body>
+
+</html>
