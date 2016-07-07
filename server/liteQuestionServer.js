@@ -3,36 +3,56 @@
  */
 var express = require('express');
 var app = express();
-var redis = require("redis");
-var client = redis.createClient();
+var http = require("http");
+var qs = require("querystring");
+var remoteOption = {
+    hostname:"",
+    port:""
+};
 
 app.get('/', function (req, res) {
     res.send('Hello World');
-})
+});
 
 app.get("/getQuestion",function (req, res) {
-    var question_id = getUserQuestionList();
-    
-    console.log(req.query.userId);
+    /*var userId = req.query.userId;
+    var data = {
+        userId : userId
+    };
+    var content = qs.stringify(data);
+
+    options.path = "/getQuestion?" + content;
+    options.method = "GET";
+    var req = http.request(options, function (res){
+        console.log(res);
+    });*/
+
+    console.log(req);
     res.send("this is getQuestion return");
 });
 
 app.get("/getScore",function (req, res) {
+
     console.log(req);
     res.send("this is getScore return");
 });
 
 app.get("/getAd",function (req, res) {
-    console.log(req);
 
+    console.log(req);
+    res.send("this is getAd return");
 });
 
 app.get("/getAnswer",function (req, res) {
+
     console.log(req);
+    res.send("this is getAnswer return");
 });
 
 app.post("/postAnswer",function (req, res) {
+
     console.log(req);
+    res.send("this is postAnswer return");
 });
 
 var server = app.listen(8081, function () {

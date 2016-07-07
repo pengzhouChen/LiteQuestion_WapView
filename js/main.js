@@ -12,7 +12,6 @@ $(document).ready(function(){
 
             postAnswer();
             getQuestion();
-            getScore();
 
         });
 
@@ -206,21 +205,19 @@ function hideAnswer(){
 }
 
 function getQuestion(){
-    var resString = {"userId":"1001"};
-    debugger;
-    $.get(url + "getQuestion", resString,
+    var reqString = {"userId":"1001"};
+    $.get(url + "getQuestion", reqString,
         function (data,status) {
             if (status != success){ return ; }
 
-            /*var obj = JSON.parse(data);
-            $("#spanQuestion").text(obj.question[0].question_title);
-            $("#spanQuestion").attr("data-question-id",obj.question[0].question_id);
+            var res = JSON.parse(data);
+            $("#spanQuestion").text(res.question.question_title);
+            $("#spanQuestion").attr("data-question-id",res.question.question_id);
             count = obj.question[0].answer.length;
 
-            for(var i = 0 ; i < count ; i++)
-            {
-                $("#spanAnswer" + i).text(obj.question[0].answer[i].result_content);
-                $("#spanAnswer" + i).attr("data-answer-id",obj.question[0].answer[i].result_id);
+            for(var i = 0 ; i < count ; i++) {
+                $("#spanAnswer" + i).text(res.question.answer[i].result_content);
+                $("#spanAnswer" + i).attr("data-answer-id",res.question.answer[i].result_id);
             }
 
             allChoseVisibility();
@@ -235,7 +232,7 @@ function getQuestion(){
                 }, 3000);
 
             var modal = $(this);
-            modal.trigger('reveal:close');*/
+            modal.trigger('reveal:close');
         });
 
     /*//testCode
@@ -265,19 +262,8 @@ function getQuestion(){
     //end of testCode*/
 }
 
-function getScore() {
-    $.get("",function (data,status) {
-        var obj = JSON.parse(data);
-        $("#h1Score").text("积分: +" + obj.answerscore);
-    });
-    $("#divScore").fadeIn("show");
-    setTimeout(function () {
-        $("#divScore").fadeOut("show");
-    },1000)
-}
-
 function getAd(){
-    $.get("",function (data,status) {
+    $.get(url + "getAd",function (data,status) {
         var obj = JSON.parse(data);
         $("#img_AD").attr("src",obj.ad_pic);
         $("#h1_AD").text(obj.ad_context);
@@ -286,7 +272,7 @@ function getAd(){
 }
 
 function getAnswer(){
-    $.get("",function (data,status) {
+    $.get(url + "getAnswer",function (data,status) {
         var obj = JSON.parse(data);
         count = obj.answer.length;
         for(var i = 0; i <count; i++) {
@@ -300,13 +286,18 @@ function postAnswer(){
     var userId = $.cookie("userId");
     var questionId = $("spanQuestion").attr("data-question-id");
     var answerId = $("input[name='foo']:checked").attr("data-answer-id");
-    $.post("",{
+    $.post(url + "/postAnswer",{
         userId : userId,
         questionId : questionId,
         answerId : answerId
     },function(data,status){
         //testCode
-        alert("Data: " + data + "nStatus: " + status);
+        var res = JSON.parse(data);
+        $("#h1Score").text("积分: +" + res.userScore);
+        $("#divScore").fadeIn("show");
+        setTimeout(function () {
+            $("#divScore").fadeOut("show");
+        },1000);
         //end of testCode
     })
 }
